@@ -40,3 +40,11 @@ app.post("/movies/", async (request, response) => {
   const movieList = await db.run(query);
   response.send("Movie Sucessfully Added");
 });
+
+app.get("/movies/:movieId/", async (request, response) => {
+  const movieId = request.params;
+  const query = `
+    SELECT * FROM movie WHERE movie_id like '${movieId}';`;
+  const movieData = await db.get(query);
+  response.send(movieData);
+});
